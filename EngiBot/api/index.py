@@ -12,6 +12,14 @@ app = FastAPI()
 if "GEMINI_API_KEY" in os.environ:
     genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
+@app.get("/api/health")
+async def health_check():
+    return {"status": "ok", "message": "EngiBot API is running"}
+
+@app.get("/api")
+async def root():
+    return {"status": "ok", "message": "EngiBot API Root. Use /api/chat for interactions."}
+
 # 2. YOUR REAL STOCK (Prices & IDs)
 PRODUCT_CATALOG = """
 --- SELEC CONTROLLERS ---
